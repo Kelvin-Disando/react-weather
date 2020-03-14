@@ -15,6 +15,8 @@ const Main = () => {
           <ForecastToday/>
             <div className="forecast_week">
              <ForecastWeek/>
+             <ForecastWeek/>
+             <ForecastWeek/>
             </div>
           </div>
           <div className="primary_data--map">
