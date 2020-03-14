@@ -1,0 +1,18 @@
+@import '../../../styles/base/fonts';
+
+.coordinates_data {
+  font-family: $app-font;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.875rem;
+  text-align: right;
+  text-transform: capitalize;
+  color: #969e26;
+  @media (max-width: 1240px) {
+    margin-top: 1.5rem;
+  }
+}
+  
+  
+  

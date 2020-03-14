@@ -1,0 +1,36 @@
+@import '../../../styles/base/fonts';
+
+.forecast_week {
+  display: flex;
+  justify-content: space-evenly;
+  @media (max-width: 580px) {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top:  2.5rem;
+  }
+  &--title {
+    font-family: $app-font;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.375rem;
+    line-height: 1.688rem;
+    text-transform: uppercase;
+    color: #b0b92d;
+  }
+  &--weather_indication {
+    font-family: $app-font;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 5rem;
+    line-height: 6.125rem;
+    text-transform: uppercase;
+    color: #b0b92d;
+  }
+  @media (max-width: 1240px) {
+    justify-content: space-evenly;
+  }
+}
+  
+  
+  

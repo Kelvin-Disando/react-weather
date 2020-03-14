@@ -1,0 +1,35 @@
+@import '../../../styles/base/fonts';
+
+  .destination_date {
+    display: flex;
+    flex-direction: column;
+    @media (max-width: 1240px) {
+      align-items: center;
+      margin-top: 5.188rem;
+    }
+  }
+  
+  .destination {
+    @media (max-width: 1000px) {
+      text-align: center;
+    }
+    font-family: $app-font;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 2.75rem;
+    line-height: 3.375rem;
+    text-transform: uppercase;
+    color: #ffffff;
+  }
+  
+  .date {
+    font-family: $app-font;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1.813rem;
+    color: #ffffff;
+  }
+  
+  
+  

@@ -1,0 +1,93 @@
+@import '../../styles/base/fonts';
+
+.main {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 10;
+  }
+
+  .primary_data {
+    display: flex;
+    justify-content: space-evenly;
+    &--forecast {
+      @media (max-width: 1240px) {
+        flex-basis: auto;
+      }
+      flex-basis: 50%;
+    }
+    &--map {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      @media (max-width: 1240px) {
+        align-items: center;
+        margin-top: 1.875rem;
+      }
+    }
+    @media (max-width: 1240px) {
+      flex-direction: column;
+      margin-top: 1.25rem;
+    }
+  }
+  
+  
+  
+  
+  
+  #map {
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    border-radius: 5px;
+  }
+  //map
+  .map_wrapper {
+    @media (max-width: 400px) {
+      width: 300px;
+      height: 300px;
+    }
+    position: relative;
+    width: 375px;
+    height: 375px;
+  }
+  
+  .hide {
+    visibility: hidden;
+  }
+  
+  .preloader {
+    @media (max-width: 600px) {
+      left: 55%;
+    }
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border: 16px solid rgba(243, 240, 240, 0.7);
+    border-radius: 50%;
+    border-top: 16px solid rgba(201, 37, 216, 0.7);
+    width: 120px;
+    height: 120px;
+    -webkit-animation: roll 2s linear infinite;
+    animation: roll 2s linear infinite;
+  }
+  
+  @-webkit-keyframes roll {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes roll {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .degrees_unit_active {
+    background-color: rgb(38, 179, 97);
+  }
+  
