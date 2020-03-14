@@ -1,0 +1,27 @@
+.celsius {
+  @media (max-width: 410px) {
+    height: 35px;
+  }
+  width: 44px;
+  height: 44px;
+  background: rgba(180, 184, 187, 0.4);
+  border-radius: 5px 0 0 5px;
+  border: 1px solid rgba(228, 227, 227, 0.2);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+.fahrenheit {
+  @media (max-width: 410px) {
+    height: 35px;
+  }
+  width: 44px;
+  height: 44px;
+  background: rgba(180, 184, 187, 0.4);
+  border-radius: 0 5px 5px 0;
+  border: 1px solid rgba(228, 227, 227, 0.2);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+  
