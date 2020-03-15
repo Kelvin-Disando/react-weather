@@ -117,6 +117,7 @@ export const appMainStore = createSlice({
     },
 
     setAppWeatherInfo:(state, action) => {
+     
       state.app.main.forecast.today.degrees.f = Math.round(action.payload[0].currently.temperature);
       state.app.main.forecast.today.degrees.c = degreesExchangeToC(state.app.main.forecast.today.degrees.f);
       state.app.main.forecast.today.icon = action.payload[0].currently.icon;
@@ -179,11 +180,15 @@ function* initWeatherAppWorker(actions) {
     );
     yield put(setAppLocationInfo(userLocationInfo));
     const weatherData = yield call (getAllLangWeather, [coords.latitude.value, coords.longitude.value]);
+    console.log('KLKLK',weatherData)
     yield put(setTimezone(weatherData));
-    yield put(setAppDateInfo(getCurrentStateTimezone()));
+    const currentTimezone = yield select(getCurrentStateTimezone);
+    yield put(setAppDateInfo(currentTimezone));
     yield put(setAppWeatherInfo(weatherData));
-    const background = yield getNewBackground([getStateBackgroundData()]);
+    const backgroundRequestArgs = yield select(getStateBackgroundData)
+    const background = yield getNewBackground([backgroundRequestArgs]);
     yield put(setAppWeatherBackground(background));
+      
   } catch (e) {
     yield put(fetchWeatherDataFail(e.message));
   }
