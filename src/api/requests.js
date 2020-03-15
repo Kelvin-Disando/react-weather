@@ -15,7 +15,7 @@ export async function getCoordinates (query, lang) {
     return weatherRespond;
   }
 
-  export async function getAllLangWeather (latitude, longitude) {
+  export async function getAllLangWeather ([latitude, longitude]) {
     const result = await Promise.all([getWeather(latitude, longitude, 'en'), getWeather(latitude, longitude, 'ru'), getWeather(latitude, longitude, 'be')]);
     return result;
   }
@@ -35,4 +35,19 @@ export async function getCoordinates (query, lang) {
     } catch (error) {
       return 'https://images.unsplash.com/photo-1489864983806-4d0d07e2d37d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEwMjE5OH0';
     }
+  }
+
+  export async function initApp() {
+    const userData = await this.getCurrentUserCoords();
+    const userCoords = userData.loc.split(',');
+    this.data.main.forecast.coordinates.latitude.value = userCoords[0];
+    this.data.main.forecast.coordinates.longitude.value = userCoords[1];
+    const userLocationInfo = await this.getAllLangCoords(`${this.data.main.forecast.coordinates.latitude.value}+${this.data.main.forecast.coordinates.longitude.value}`);
+    this.setAppLocationInfo(userLocationInfo);
+    const weatherData = await this.getAllLangWeather(this.data.main.forecast.coordinates.latitude.value, this.data.main.forecast.coordinates.longitude.value); /* .then(a => weatherData = a); */
+    this.data.main.timezone = weatherData[0].timezone;
+    this.setAppDateInfo(this.data.main.timezone);
+    this.setAppWeatherInfo(weatherData);
+    this.data.background = await this.getNewBackground(this.data.main.country.en, this.data.main.time.season, this.data.main.forecast.today.summary.clouds.en, this.data.main.time.daytime);
+    this.appChangesRespond(this.data);
   }

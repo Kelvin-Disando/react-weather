@@ -3,15 +3,15 @@ import createSagaMiddleware from 'redux-saga';
 import { all } from 'redux-saga/effects';
 import { logger } from 'redux-logger';
 // import { reducer as formReducer } from 'redux-form';
-// import projects, { projectsSaga } from './features/projects';
+ import configuration, { weatherSaga } from './features/configuration';
 
 const reducer = {
-  projects,
+  configuration,
 
 };
 
 function* rootSaga() {
-  yield all([projectsSaga()]);
+  yield all([weatherSaga()]);
 }
 
 const initialiseSagaMiddleware = createSagaMiddleware();
