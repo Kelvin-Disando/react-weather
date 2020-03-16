@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import styles from './styles.module.scss';
 import LanguageSelect from './LanguageSelect'
 import TemperatureSelect from './TemperatureSelect'
@@ -7,6 +8,10 @@ import SearchBar from './SearchBar'
 import img from '../../assets/images/refresh-icon.svg'
 
 const Header = () => {
+    
+    const headerState = useSelector(state => state.configuration.app.header)
+    const language = useSelector(state => state.configuration.language);
+    
     return (
         <header className={styles['header']}>
              <div className={styles['header--operations']}>
@@ -19,7 +24,7 @@ const Header = () => {
                 </div>
             </div>
             <div className={styles['header--search']}>
-               <SearchBar/>
+               <SearchBar inputPlaceholder={headerState.search.input[language]} submitButton={headerState.search.submit[language]}/>
         </div>
         </header>
     );

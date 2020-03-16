@@ -125,7 +125,8 @@
 },
 loading: false,
 firstLaunch: true,
-errors: []
+errors: [],
+language: 'en'
   }
 
 
