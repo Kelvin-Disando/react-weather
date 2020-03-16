@@ -147,12 +147,15 @@ export const appMainStore = createSlice({
     fetchWeatherDataSuccess: (state, action) => {
       state.loading = false;
       state.errors = [];
-      state.list = action.payload;
     },
     fetchWeatherDataFail: (state, action) => {
       state.loading = false;
       state.errors.push(action);
-    }
+    },
+    initWeatherSuccess: (state, action) => {
+      state.firstLaunch = false;
+      state.errors = [];
+    },
   }
 });
 
@@ -165,7 +168,8 @@ export const {
   setTimezone,
   setAppDateInfo,
   setAppWeatherInfo,
-  setAppWeatherBackground
+  setAppWeatherBackground,
+  initWeatherSuccess
 } = appMainStore.actions;
 export default appMainStore.reducer;
 
@@ -188,6 +192,9 @@ function* initWeatherAppWorker(actions) {
     const backgroundRequestArgs = yield select(getStateBackgroundData)
     const background = yield getNewBackground([backgroundRequestArgs]);
     yield put(setAppWeatherBackground(background));
+    yield put(fetchWeatherDataSuccess());
+    yield put(initWeatherSuccess());
+
       
   } catch (e) {
     yield put(fetchWeatherDataFail(e.message));

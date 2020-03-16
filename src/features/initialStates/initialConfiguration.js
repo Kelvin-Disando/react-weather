@@ -124,6 +124,7 @@
     background: ""
 },
 loading: false,
+firstLaunch: true,
 errors: []
   }
 

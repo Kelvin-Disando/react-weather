@@ -12,6 +12,6 @@ export function degreesExchangeToC(value) {
 
   export const getCurrentStateCoords = state => state.configuration.app.main.forecast.coordinates;
 
-  export const getCurrentStateTimezone = state => {debugger; return state.configuration.app.main.timezone;}
+  export const getCurrentStateTimezone = state =>  state.configuration.app.main.timezone;
 
   export const getStateBackgroundData = state => [state.configuration.app.main.country.en, state.configuration.app.main.time.season, state.configuration.app.main.forecast.today.summary.clouds.en, state.configuration.app.main.time.daytime]
