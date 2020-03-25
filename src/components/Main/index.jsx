@@ -43,7 +43,10 @@ const Main = () => {
           <div className="map_wrapper">
             <div id="map"></div>
           </div>
-          <Coordinates />
+          <Coordinates
+            language={language}
+            {...mainState.forecast.coordinates}
+          />
         </div>
       </div>
     </div>
