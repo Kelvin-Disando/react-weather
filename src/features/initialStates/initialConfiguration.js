@@ -1,5 +1,5 @@
- export const initialConfig = {
-    app: {
+export const initialConfig = {
+  app: {
     header: {
       search: {
         input: {
@@ -122,11 +122,10 @@
       }
     },
     background: ""
-},
-loading: false,
-firstLaunch: true,
-errors: [],
-language: 'en'
-  }
-
-
+  },
+  loading: false,
+  firstLaunch: true,
+  errors: [],
+  language: "en",
+  degreesType: "c"
+};
