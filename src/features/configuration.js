@@ -4,7 +4,8 @@ import {
   getCurrentUserCoords,
   getAllLangCoords,
   getAllLangWeather,
-  getNewBackground
+  getNewBackground,
+  getCoordinates
 } from "../api/requests";
 import {
   degreesExchangeToC,
@@ -271,6 +272,9 @@ export const appMainStore = createSlice({
     initWeatherSuccess: (state, action) => {
       state.firstLaunch = false;
       state.errors = [];
+    },
+    userSearchWeatherRequest: (state, action) => {
+      state.loading = true;
     }
   }
 });
@@ -285,7 +289,8 @@ export const {
   setAppDateInfo,
   setAppWeatherInfo,
   setAppWeatherBackground,
-  initWeatherSuccess
+  initWeatherSuccess,
+  userSearchWeatherRequest
 } = appMainStore.actions;
 export default appMainStore.reducer;
 
@@ -303,7 +308,6 @@ function* initWeatherAppWorker(actions) {
       coords.latitude.value,
       coords.longitude.value
     ]);
-    console.log("KLKLK", weatherData);
     yield put(setTimezone(weatherData));
     const currentTimezone = yield select(getCurrentStateTimezone);
     yield put(setAppDateInfo(currentTimezone));
@@ -318,17 +322,29 @@ function* initWeatherAppWorker(actions) {
   }
 }
 
-// function* postProjectsWorker({ payload: { values, resolve, reject } }) {
-//   try {
-//     const payload = yield call(api.projects.create, values);
-//     yield put(addProjectSuccess(payload.data));
-//     yield call(resolve);
-//   } catch (e) {
-//     yield put(addProjectFail(e.message));
-//     yield call(reject);
-//   }
-// }
+function* userSearchWeatherWorker({ payload }) {
+  try {
+    const data = yield call(getAllLangCoords, payload);
+    yield put(setAppLocationInfo(data));
+    const coords = yield select(getCurrentStateCoords);
+    const weatherData = yield call(getAllLangWeather, [
+      coords.latitude.value,
+      coords.longitude.value
+    ]);
+    yield put(setTimezone(weatherData));
+    const currentTimezone = yield select(getCurrentStateTimezone);
+    yield put(setAppDateInfo(currentTimezone));
+    yield put(setAppWeatherInfo(weatherData));
+    const backgroundRequestArgs = yield select(getStateBackgroundData);
+    const background = yield getNewBackground([backgroundRequestArgs]);
+    yield put(setAppWeatherBackground(background));
+    yield put(fetchWeatherDataSuccess());
+  } catch (e) {
+    yield put(fetchWeatherDataFail(e.message));
+  }
+}
 
 export function* weatherSaga() {
   yield takeEvery(initWeatherApp().type, initWeatherAppWorker);
+  yield takeEvery(userSearchWeatherRequest().type, userSearchWeatherWorker);
 }
