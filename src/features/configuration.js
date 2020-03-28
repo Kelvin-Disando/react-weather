@@ -275,6 +275,9 @@ export const appMainStore = createSlice({
     },
     userSearchWeatherRequest: (state, action) => {
       state.loading = true;
+    },
+    changeLanguageAction: (state, action) => {
+      state.language = action.payload
     }
   }
 });
@@ -290,7 +293,8 @@ export const {
   setAppWeatherInfo,
   setAppWeatherBackground,
   initWeatherSuccess,
-  userSearchWeatherRequest
+  userSearchWeatherRequest,
+  changeLanguageAction
 } = appMainStore.actions;
 export default appMainStore.reducer;
 
@@ -343,6 +347,7 @@ function* userSearchWeatherWorker({ payload }) {
     yield put(fetchWeatherDataFail(e.message));
   }
 }
+
 
 export function* weatherSaga() {
   yield takeEvery(initWeatherApp().type, initWeatherAppWorker);

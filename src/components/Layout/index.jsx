@@ -1,5 +1,4 @@
 import React , { useEffect }from 'react';
-import classnames from 'classnames'
 import { useDispatch, useSelector } from 'react-redux';
 import {initWeatherApp} from '../../features/configuration'
 import Preloader from '../Preloader'
