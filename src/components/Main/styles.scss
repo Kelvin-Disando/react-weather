@@ -35,13 +35,13 @@
   
   
   
-  #map {
-    width: 100%;
-    top: 0;
-    bottom: 0;
-    position: absolute;
-    border-radius: 5px;
-  }
+  // #map {
+  //   width: 100%;
+  //   top: 0;
+  //   bottom: 0;
+  //   position: absolute;
+  //   border-radius: 5px;
+  // }
   //map
   .map_wrapper {
     @media (max-width: 400px) {
@@ -51,6 +51,7 @@
     position: relative;
     width: 375px;
     height: 375px;
+    border-radius: 5px;
   }
   
   .hide {

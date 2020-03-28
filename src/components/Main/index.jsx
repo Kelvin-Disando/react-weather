@@ -6,6 +6,8 @@ import LocationData from "./LocationData";
 import ForecastToday from "./ForecastToday";
 import ForecastWeek from "./ForecastWeek";
 import Coordinates from "./Coordinates";
+import Map from "./MapBox";
+
 
 const Main = () => {
   const mainState = useSelector(state => state.configuration.app.main);
@@ -41,7 +43,7 @@ const Main = () => {
         </div>
         <div className="primary_data--map">
           <div className="map_wrapper">
-            <div id="map"></div>
+           <Map longitude={mainState.forecast.coordinates.longitude.value} latitude={mainState.forecast.coordinates.latitude.value}/>
           </div>
           <Coordinates
             language={language}

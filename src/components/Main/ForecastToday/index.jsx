@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import "./styles.scss";
 
 const ForecastToday = ({ language, degreesType, degrees, icon, summary }) => {
+  debugger
   return (
     <div className="forecast_today">
       <div className="forecast_today--degrees">
@@ -10,7 +11,7 @@ const ForecastToday = ({ language, degreesType, degrees, icon, summary }) => {
           {degrees[degreesType]}
         </span>
         <span className="forecast_today--degrees_icon">&deg;</span>
-        <img src="" alt="" className="forecast_today--weather_image" />
+        <img src={require(`../../../assets/weather-icons/big/${icon}.png`)} alt="" className="forecast_today--weather_image" />
       </div>
       <div className="forecast_today--details">
         <span className="forecast_today--sky">{summary.clouds[language]}</span>

@@ -11,7 +11,7 @@ const ForecastWeek = ({ language, degreesType, title, value, icon }) => {
       <div className="forecast_week--weather_indication">
         <span className="tomorrow--temperature">{value[degreesType]}</span>
         <span className="tomorrow--icon">&deg;</span>
-        <img className="tomorrow--image" src="" alt="" />
+        <img className="tomorrow--image" src={require(`../../../assets/weather-icons/${icon}.png`)} alt="" />
       </div>
     </div>
   );
