@@ -278,6 +278,10 @@ export const appMainStore = createSlice({
     },
     changeLanguageAction: (state, action) => {
       state.language = action.payload
+    },
+    changeDegreesType: (state, action) => {
+      if ( state.degreesType === action.payload) return
+      state.degreesType = action.payload
     }
   }
 });
@@ -294,7 +298,8 @@ export const {
   setAppWeatherBackground,
   initWeatherSuccess,
   userSearchWeatherRequest,
-  changeLanguageAction
+  changeLanguageAction,
+  changeDegreesType
 } = appMainStore.actions;
 export default appMainStore.reducer;
 

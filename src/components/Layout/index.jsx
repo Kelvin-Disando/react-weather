@@ -18,7 +18,7 @@ function Layout({children}) {
   useEffect(() => {
     dispatch(initWeatherApp())
   }, [])
-  debugger
+  
   return (
     <div className={styles.wrapper} style={additionStyles}>
     {loadingState && <Preloader/>}

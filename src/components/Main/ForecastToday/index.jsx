@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import "./styles.scss";
 
 const ForecastToday = ({ language, degreesType, degrees, icon, summary }) => {
-  debugger
+  
   return (
     <div className="forecast_today">
       <div className="forecast_today--degrees">
