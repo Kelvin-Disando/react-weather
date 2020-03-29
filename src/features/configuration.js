@@ -282,6 +282,9 @@ export const appMainStore = createSlice({
     changeDegreesType: (state, action) => {
       if ( state.degreesType === action.payload) return
       state.degreesType = action.payload
+    },
+    refreshApp: (state, action) => {
+      state.loading = true;
     }
   }
 });
@@ -299,7 +302,8 @@ export const {
   initWeatherSuccess,
   userSearchWeatherRequest,
   changeLanguageAction,
-  changeDegreesType
+  changeDegreesType,
+  refreshApp
 } = appMainStore.actions;
 export default appMainStore.reducer;
 
@@ -352,9 +356,31 @@ function* userSearchWeatherWorker({ payload }) {
     yield put(fetchWeatherDataFail(e.message));
   }
 }
+function* refreshAppWorker() {
+  try {
+    const coords = yield select(getCurrentStateCoords);
+    const weatherData = yield call(getAllLangWeather, [
+      coords.latitude.value,
+      coords.longitude.value
+    ]);
+    yield put(setTimezone(weatherData));
+    const currentTimezone = yield select(getCurrentStateTimezone);
+    yield put(setAppDateInfo(currentTimezone));
+    yield put(setAppWeatherInfo(weatherData));
+    const backgroundRequestArgs = yield select(getStateBackgroundData);
+    const background = yield getNewBackground([backgroundRequestArgs]);
+    yield put(setAppWeatherBackground(background));
+    yield put(fetchWeatherDataSuccess());
+
+    
+  } catch (e) {
+    yield put(fetchWeatherDataFail(e.message));
+  }
+}
 
 
 export function* weatherSaga() {
   yield takeEvery(initWeatherApp().type, initWeatherAppWorker);
   yield takeEvery(userSearchWeatherRequest().type, userSearchWeatherWorker);
+  yield takeEvery(refreshApp().type, refreshAppWorker);
 }
